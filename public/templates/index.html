@@ -1,0 +1,87 @@
+
+<body ng-controller="MainViewController as vm">
+    <div ng-if="vm.welcomeScreen==1">
+        <h1> Welcome! </h1>
+        <p> A description of the current problem set will be listed. </p>
+        <p> To Begin, click start</p>
+        <button ng-click="vm.start(0)"> Start </button>
+        <button ng-click="vm.start(1)"> Start With Immediate Feedback </button>
+    </div>
+
+    <div ng-if="vm.welcomeScreen==0">
+        <div class="question-box">
+            <h1> Question </h1>
+            <p id="question-text">{{vm.currentQuestion.question}}</p>
+        </div>
+        <div class="answer-container">
+            <table>
+                <tr >
+                    <td ng-click="vm.selectAnswer(1)">{{vm.currentQuestion.ans1}}</td>
+                </tr>
+                <tr>
+                    <td ng-click="vm.selectAnswer(2)">{{vm.currentQuestion.ans2}}</td>
+                </tr>
+                <tr>
+                    <td ng-click="vm.selectAnswer(3)">{{vm.currentQuestion.ans3}}</td>
+                </tr>
+                <tr>
+                    <td ng-click="vm.selectAnswer(4)">{{vm.currentQuestion.ans4}}</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="progress-section">
+            <h6> Progress {{vm.questionCounter+1}}/{{vm.getQSetSize()}} </h6>
+            <h5 ng-if="vm.selectedAnswer > 0"> Selected Answer: {{vm.selectedAnswer}}</h5>
+                <button ng-if="vm.hasSelectedAnswer==true" ng-click="vm.next()">Answer and continue</button>
+                <button ng-click="vm.review()"> Review </button>
+        </div>
+        <div class="correct-section">
+            <h3 ng-if="vm.revealAnswer==1"> Answer is Option #{{vm.currentQuestion.key}}</h3>
+        </div>
+
+
+    </div>
+    <div class="feedback-section" ng-if="vm.welcomeScreen==3">
+        <h3> Feedback </h3>
+        <h5>Correct:{{vm.qCorrect}}</h5>
+        <h5>Incorrect:{{vm.qWrong}}</h5>
+        <h5>Total ?'s {{vm.getQSetSize()}} </h5>
+        <button ng-click="vm.restart()">Restart Quiz</button>
+
+            <div class="col-md-4">
+                <h3>Question</h3>
+            </div>
+            <div class="col-md-4">
+                <h3>Key Answer</h3>
+            </div>
+            <div class="col-md-4">
+                <h3>Your Answer</h3>
+            </div>
+
+            <div ng-repeat="question in vm.qData" class="result-display">
+                <div class="col-md-4">
+                    <p> {{question.question}}</p>
+                </div>
+
+                <div ng-if="question.keyAnswer == question.userAnswer" >
+                    <div class="col-md-4">
+                        <p>{{question.keyAnswer}}</p>
+                    </div>
+                    <div class="col-md-4" >
+                        <p class="correct-a">{{question.userAnswer}}</p>
+                    </div>
+                </div>
+
+                <div ng-if="question.keyAnswer != question.userAnswer" >
+                    <div class="col-md-4">
+                        <p>{{question.keyAnswer}}</p>
+                    </div>
+                    <div class="col-md-4" >
+                        <p class="incorrect-a">{{question.userAnswer}}</p>
+                    </div>
+                </div>
+
+            </div>
+    </div>
+</body>

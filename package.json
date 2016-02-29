@@ -1,0 +1,8 @@
+{
+    "dependencies" : {
+      "express"    : "latest",
+      "request"    : "latest",
+      "q"          : "latest",
+
+    }
+}
