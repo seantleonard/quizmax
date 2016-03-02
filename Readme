@@ -1,0 +1,56 @@
+MainView Controller
+
+Shuffle(); Fisher Yates shuffle algorithm
+
+vm.restart
+	Restart Quiz , reset variables.
+
+vm.start
+	starts the quiz , changes variable to clear welcome screen, present quiz screens
+	Shuffles the questions,
+	displays question based on questionCounter value (init = 0)
+
+vm.displayQuestion
+	takes questionCounter Value passed in and retrieves question from question bank
+
+vm.selectAnswer
+	when user selects answer, selectedAnswer variable updated, reveals next button for next question
+
+vm.next
+	stores user answer and resets variables to rehide buttons for clicking next 
+
+vm.getQSetSize
+	gets # of questions in question bank
+
+vm.review
+	since question order array is shuffled, I need to get the question according 
+	to the first value in question array. Then get the keys from the json object,
+	retrieve the answer key and match it to the correct answer. 
+	then push the key answer to an array and then push the user answer to an additional array. 
+	Then: take the elements push and create JSON object with question, user answer, key answer to
+	another array to display on the screen. 
+	
+
+MainPage:
+Welcome Screen
+	Start (without feedback)
+	Start (feedback)
+
+Answer Container
+	Contains the answer selections for the question
+
+Progress Section
+	gives what question number you are on out of total ?'s
+	has buttons for next question review
+
+Correct Section
+	Shows correct answer if user clicks button to reveal (if in immediate feedback mode)
+
+Feedback Section
+	shows how many correct/incorrect answers
+	then shows the user answers for each question, highlights orange if wrong, green if correct. 
+
+qbank:
+	JSON Data with each question 
+	data for each answer
+	answer key in object. 
